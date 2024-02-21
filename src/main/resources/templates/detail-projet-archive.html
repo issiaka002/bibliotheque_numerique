@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Archive</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link th:href="@{assets/img/favicon.png}" rel="icon">
+  <link th:href="@{assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link th:href="@{assets/vendor/aos/aos.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link th:href="@{assets/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Mobile nav toggle button ======= -->
+<!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
+<i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex flex-column justify-content-center">
+
+  <nav id="navbar" class="navbar nav-menu">
+    <ul>
+
+      <li><a th:href="@{/}" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Accueil</span></a></li>
+      <li><a th:href="@{/dashboard}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Dashboard</span></a></li>
+      <li><a th:href="@{/projet}" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Projet</span></a></li>
+      <li><a th:href="@{/archive}" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Archive</span></a></li>
+      <li><a th:href="@{/a-propos}" class="nav-link scrollto"><i class="bx bx-calendar"></i> <span>A propos</span></a></li>
+    </ul>
+  </nav><!-- .nav-menu -->
+
+</header><!-- End Header -->
+
+
+<main id="main">
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title d-flex justify-content-between">
+        <h2>Detail du projet #[[${projet.idProjet}]] </h2>
+        <a title="Archiver le projet !"
+           th:href="@{/archiverProjet(id=${projet.idProjet}) }" role="button">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABAZJREFUaEPtmVmoTVEYx383QzJkiEiiZJ6nF2OmDAmR2YMXL4rMmacMmSkpL0rJTMqDKDNJpvBAkieJknlIUuy/9rntu62991p7n32vW766nbrnm/5rfeubTgmVnEoquf/8B1DRN1jMG6gHDAYG+J+dQ+C+Aje87y8BV4DbxQCfFUB9YD4wCujh6NBHH8xB4LSjbCl7FgBzgfVAnbTGA3KXgdnAY1ddaQB0Aw4D7V2NWfBvAZZa8KW+gam+8y42XHmvAeOAdzaCLjewDlhto7QIPM+B4YA+Y8kWwEZgeZKyIn//GugO6DOSbADMAA4U2TlbdY+A3sC3KIEkAEqNt4BqthZz4DsJTEwDoAbwFGieg1OuKqdHJY+4G9gOLHS1lBP/J6AF8CGsPwqAipMeT82cHEqjdgGwyxaAquzuNFZylFFKbWUL4JmJOUfnbFUPBK4GmU0h1BV4YKlRDVldS94otu+AEoYN7QNmJQGYZ4o1g/YnQF9gD6AskYbkvDpZATjjNYdVEpTIZockAMe8rnBSgiKl1/7AG5/vEDAtBYIRXqE678sp1x+30KEbV1b6Q6YQUvULDyNBvUplOoVXIWNHgCkWDhRYRgLnQvyaLXYm6OgF3IsDIAeT4nqlV53VH4XpKDDZAoTJeQ1HmtS6JMjrkBQlkTfwGaht4cRa7wbVoQZJMSwQEyLkfwBjDSff0He+o4XdxZ5/KrKRAGxuoCC/CVhhMHoiAoQe7NkQv4vzEi1j0/QGXgJNLU6iwKLT0KkEqar3jk4BY/x//vTidnTEyWvQb+tgTwcmEJE3oBqgWuBCG4BVBgGBGO+HjdJkkBoBmoVtwiYoNxPYHwcg6vqTAEWFUx/gpiFsNDqmmau1trkeB2CN96UeaBraDCxLEFTMp3VeqhsA7+MAaDl1MY33vozpTRTUNfZ7GZeYD7ryENBWpJSi2ukvQK0MIEw3kdV5ubMVWGIDwLYgxWEM3oSc1ztomeFQJNrTy2z3bQAMC/QoWWxu8xtDZZu0YVOwr+yoLUUZihsp1W+47jtNYFUYtfjNSkrHf+1Q4wD087NF0uYiq2M28uqRBpkYk5z7FwZ7tc6dgBdpAKgl0F5Ij6ci6Jf3+PUeL0QZT7oByTXxpqY7QLMKQLDIW9/viLNrA0DyKvmqnqqi5UVxBbHUB1sAEtCGTuNfu3JAoB879trYcQEgfarO6jC1+s6D3vq/DZQ2a0lGXAFIn2S0sVZZV0tcLNJvZVplFhYFVnrTACgo1tysGWCON2BUt7JmZrrr73r06UxZAASBDPV69CH+X5sEL7QM03ZNqVFdr/MPe0H9xQAQ9lfjqKpm69AX6uEV22WaMecjDwnkASCrT07y/wE4HVcOzL8Bn+WaMavyW1wAAAAASUVORK5CYII="/>
+        </a>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <span class="fst-italic">Rapport a télécharger </span>
+          <a title="Telecharger rapport" class="btn-archive"
+             th:href="@{'/files/'+${projet.rapport.name} }" role="button">
+            <img src="data:image/png;base64,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"/>
+          </a>
+        </div>
+        <div class="col-lg-8 pt-4 pt-lg-0 content">
+          <h3 class="mb-3"> <strong>THEME: </strong> 🚨 [[${projet.theme}]] 🚨</h3>
+          <h6 class="fst-italic mb-3 mt-3">
+            <strong>Description: </strong> [[${projet.description}]]
+          </h6>
+          <div class="row mb-3 mt-3">
+            <div class="col-lg-6">
+              <ul>
+                <li><i class="bi bi-chevron-right"></i> <strong>Debut:</strong> <span>[[${projet.dateDebut}]]</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Soutenance:</strong> <span>[[${projet.dateSoutenance}]] 🎀</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Fin:</strong> <span>[[${projet.dateFin}]]</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Etat:</strong> <span>[[${projet.etat}]]😟</span></li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul>
+                <li><i class="bi bi-chevron-right"></i> <strong>Ecole:</strong> <span>[[${projet.ecole}]]</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Cycle:</strong> <span>[[${projet.cycle}]]</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Encadreur:</strong> <span>[[${projet.encardreur}]]</span></li>
+                <li><i class="bi bi-chevron-right"></i> <strong>Jury:</strong> <span>[[${projet.jury}]]</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="mb-3 mt-3" ><strong>Equipes :</strong></p>
+          <p>
+            (Elèves [[${projet.cycle}]] 🎩) :  [[${projet.etudiants}]]
+          </p>
+          <p class="mb-3 mt-3" ><strong>Les remarques observées 👌:</strong></p>
+          <p>
+            [[${projet.remarques}]]
+          </p>
+
+        </div>
+        <div class="float-end mt-3 mb-3">
+
+          <form th:action="@{/commentaire(id=${projet.idProjet})}" method="post"  th:object="${commentaire}">
+
+            <div class="form-group">
+              <input type="text" minlength="2" maxlength="128" class="form-control" th:field="*{titre}" placeholder="Le titre">
+            </div>
+            <div class="form-group mt-3 mb-3">
+              <textarea class="form-control"  rows="3" th:field="*{description}"  placeholder="Ajouter un commentaire ..." required></textarea>
+            </div>
+            <div class="text-center float-end"><button class="btn btn-primary btn-sm" type="submit">Ajouter un commentaire</button></div>
+          </form>
+
+        </div>
+
+        <div class="mb-3 mt-3" th:if="${projet.commentaires.size() > 0}">
+
+          <ul th:each="p:${projet.commentaires}" class="list-group list-group-light">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+
+              <div class="d-flex align-items-center">
+                <img src="assets/img/download.jpeg" alt="" style="width: 40px; height: 40px" class="" />
+                <div class="ms-3">
+                  <p class="fw-bold mb-1"> [[${p.getTitre}]] ✍️✍️</p>
+                  <p class="text-muted mb-0">➰ [[${p.description}]]</p>
+                  <p class="text-muted mb-0">➰ Fait le : <span class="fst-italic">[[${p.date}]]</span> </p>
+                </div>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb-3 mt-3" th:unless="${projet.commentaires.size() > 0}">
+          <span class="fst-italic ">Aucun commentaire sur ce projet </span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="container">
+    <h3>Votre bibliothèque numérique</h3>
+    <p>Explorez l'histoire de vos projets avec notre plateforme d'archivage intuitive et sécurisée .</p>
+    <div class="social-links">
+      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+    </div>
+    <div class="copyright">
+      &copy; Copyright <strong><span>INP-HB</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: [license-url] -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
+      Designed by <a href="https://bootstrapmade.com/">STIC INFO 3</a>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{assets/vendor/aos/aos.js}"></script>
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{assets/vendor/typed.js/typed.umd.js}"></script>
+<script th:src="@{assets/vendor/waypoints/noframework.waypoints.js}"></script>
+<script th:src="@{assets/vendor/php-email-form/validate.js}"></script>
+
+<script type="text/javascript">
+
+</script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>
